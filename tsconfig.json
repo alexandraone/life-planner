@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "ES2015",
+    "jsx": "react",
+    "target": "ES6",
+    "lib": ["ES2015", "DOM", "DOM.Iterable"],
+    // Include module source maps for debugging
+    "sourceMap": true
+  }
+}

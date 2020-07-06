@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Tell express to serve our static files from our output folder
-app.use(express.static('dist'));
+app.use(express.static('dist/public'));
 
 // Hide "powered by express"
 app.disable('x-powered-by');

@@ -3,44 +3,59 @@
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
-module.exports = () => {
-  const env = dotenv.config().parsed;
-  const mode = env.NODE_ENV || 'development';
+const env = dotenv.config().parsed;
+const mode = env.NODE_ENV || 'development';
 
-  // reduce it to a object
-  const envKeys = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-  }, {});
+// reduce it to a object
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
-  return {
-    mode,
-    devtool: mode === 'development' ? 'inline-source-map' : false,
-    entry: './src/index.tsx',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    // Supported file loaders
-    module: {
-      rules: [
-        {
-          test: /\.(tsx?)|(jsx?)$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', 'jsx', '*'],
-    },
-    plugins: [new webpack.DefinePlugin(envKeys)],
-    devServer: {
-      publicPath: '/dist/',
-      contentBase: path.resolve(__dirname, '.'),
-      watchContentBase: true,
-      compress: true,
-    },
-  };
+const config = {
+  mode,
+  devtool: mode === 'development' ? 'inline-source-map' : false,
+  // Supported file loaders
+  module: {
+    rules: [
+      {
+        test: /\.(tsx?)|(jsx?)$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', 'jsx'],
+    modules: ['src', 'node_modules'],
+  },
+  plugins: [
+    new webpack.DefinePlugin(envKeys),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
+
+const client = Object.assign({}, config, {
+  name: 'client',
+  target: 'web',
+  entry: './src/index.tsx',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+});
+
+const server = Object.assign({}, config, {
+  name: 'server',
+  target: 'node',
+  externals: [nodeExternals()],
+  entry: './src/server/index.tsx',
+  output: {
+    filename: 'server.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+});
+
+module.exports = [client, server];

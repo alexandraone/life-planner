@@ -5,13 +5,6 @@ import App from './App';
 
 const root = document.getElementById('root');
 
-let renderMethod: ReactDOM.Renderer;
-if (root && root.innerHTML !== '') {
-  renderMethod = ReactDOM.hydrate;
-} else {
-  renderMethod = ReactDOM.render;
-}
-
 ReactDOM.hydrate(
   <Router>
     <App />

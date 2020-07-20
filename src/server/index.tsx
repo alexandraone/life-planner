@@ -7,6 +7,7 @@ import App from '../App';
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+declare const module: any;
 
 // Tell express to serve our static files from our output folder
 app.use(express.static('dist/public'));
@@ -26,7 +27,7 @@ app.get('/*', (req, res) => {
   res.send(htmlTemplate(reactDom));
 });
 
-function htmlTemplate(reactDom) {
+function htmlTemplate(reactDom: string) {
   return `
     <!DOCTYPE html>
       <html>
@@ -46,7 +47,6 @@ function htmlTemplate(reactDom) {
 // Start the server
 app.listen(PORT, () => console.log('Server running on port 3000!'));
 
-declare const module: any;
 if (module.hot) {
   module.hot.accept();
 }

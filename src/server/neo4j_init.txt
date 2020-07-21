@@ -1,0 +1,8 @@
+CREATE (u:User) {name: "Jens"
+} (t1: Todo { title: "Getting started"
+}), (t2: Todo {title: "Continue..."
+}), (u)-[
+  :TODO
+]->(t1), (u)-[
+  :TODO
+]->(t2)

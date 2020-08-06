@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "build": "webpack --config webpack.config.js --mode=production",
-    "start": "npm run build && node dist/server.js --open NODE_ENV=production",
+    "build": "webpack --config webpack.config.js --mode production",
+    "start": "npm run build && node dist/server.js --open ",
     "heroku-postbuild": "cd src && npm install && npm run build"
   },
   "author": "Alexandra Onegård",

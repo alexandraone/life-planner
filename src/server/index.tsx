@@ -3,6 +3,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../App';
+import * as SocketIO from 'socket.io';
+import * as socketService from './socketService';
+import * as neodeService from './neodeService';
 
 const app = express();
 
@@ -17,18 +20,18 @@ app.disable('x-powered-by');
 
 // Server side rendered page
 app.get('/*', (req, res) => {
-  const appComponent = (
-    <StaticRouter location={req.url} context={{}}>
-      <App />
-    </StaticRouter>
-  );
-  const reactDom = renderToString(appComponent);
+	const appComponent = (
+		<StaticRouter location={req.url} context={{}}>
+			<App />
+		</StaticRouter>
+	);
+	const reactDom = renderToString(appComponent);
 
-  res.send(htmlTemplate(reactDom));
+	res.send(htmlTemplate(reactDom));
 });
 
 function htmlTemplate(reactDom: string) {
-  return `
+	return `
     <!DOCTYPE html>
       <html>
         <head>
@@ -45,8 +48,14 @@ function htmlTemplate(reactDom: string) {
 }
 
 // Start the server
-app.listen(PORT, () => console.log('Server running on port 3000!'));
+const server = app.listen(PORT, () =>
+	console.log('Server running on port 3000!')
+);
 
 if (module.hot) {
-  module.hot.accept();
+	module.hot.accept();
 }
+
+// Create a socket.io instance
+const io = SocketIO(server);
+socketService.createSocket(io, neodeService);

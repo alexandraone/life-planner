@@ -6,8 +6,10 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 const env = dotenv.config().parsed;
-const mode =
-  env.NODE_ENV === 'production' ? process.env.NODE_ENV : env.NODE_ENV;
+const mode = process.env.NODE_ENV || 'development';
+
+console.log('env: ', env.NODE_ENV);
+console.log('env process: ', process.env.NODE_ENV);
 // reduce it to a object
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);

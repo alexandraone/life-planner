@@ -5,8 +5,6 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const env = require('dotenv').config();
 
-console.log('process-env: ', process.env.NODE_ENV);
-
 const mode = process.env.NODE_ENV || 'development';
 
 // reduce it to a object

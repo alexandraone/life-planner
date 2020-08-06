@@ -54,7 +54,7 @@ function htmlTemplate(reactDom: string) {
 }
 
 // Start the server
-app.listen(PORT, () => console.log('Server running on port 3000!'));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 if (module.hot) {
   module.hot.accept();

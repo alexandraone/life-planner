@@ -4,6 +4,10 @@ const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
+console.log('process-env: ', process.env);
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const mode = process.env.NODE_ENV || 'development';
 
 // reduce it to a object

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Home = () => {
-  const initialText = useSelector((state) => state.initialText);
+  const initialText = useSelector((state: any) => state.initialText);
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {

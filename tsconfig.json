@@ -9,5 +9,6 @@
     // Include module source maps for debugging
     "sourceMap": true
   },
+  "moduleResolution": "node",
   "include": ["src"]
 }

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "build": "webpack --config webpack.config.js --mode=development",
-    "start": "npm run build && node dist/server.js --open"
+    "build": "webpack --config webpack.config.js --mode=production",
+    "start": "npm run build && node dist/server.js --open",
+    "heroku-postbuild": "cd src && npm install && npm run build"
   },
   "author": "Alexandra Onegård",
   "license": "ISC",
@@ -15,7 +16,7 @@
     "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-redux": "^6.0.1",
+    "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",

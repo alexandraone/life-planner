@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore } from 'redux';
 import App from './App';
-import reducers from './reducers/index';
+import reducers from './store/reducers/index';
 
 declare global {
   interface Window {

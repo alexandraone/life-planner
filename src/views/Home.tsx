@@ -1,17 +1,18 @@
-import React, { useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../store/types';
 
-const Home = () => {
-  const initialText = useSelector((state: any) => state.initialText);
+const Home: FC = () => {
+  const todo = useSelector((state: ApplicationState) => state.todos);
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {
-    dispatch({ type: 'CHANGE_TEXT' });
+    dispatch({ type: 'ADD_TODO' });
   }, [dispatch]);
 
   return (
     <div>
-      <p>{initialText}</p>
+      <p>{todo?.[0]}</p>
       <button onClick={handleClick}>Klicka här</button>
     </div>
   );

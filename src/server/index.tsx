@@ -5,13 +5,13 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import App from '../App';
-import reducers from '../reducers/index';
+import reducers from '../store/reducers/index';
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 declare const module: any;
-const initialState = { initialText: 'Rendered on the server!' };
+const initialState = {};
 const store = createStore(reducers, initialState);
 
 // Tell express to serve our static files from our output folder
@@ -40,6 +40,7 @@ function htmlTemplate(reactDom: string) {
       <html>
         <head>
           <title>React and TypeScript with webpack</title>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
         </head>
         <body>
           <div id="root">${reactDom}</div>

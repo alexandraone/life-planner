@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Error404 from './components/Error404';
-import Test from './components/Test/Test';
+import TodoLists from './components/todoLists/TodoLists';
+import Todos from './components/todos/Todos';
 import AppLayout from './layouts/AppLayout';
 import Home from './views/Home';
 
-const App = () => {
+const App: FC = () => {
   return (
     <Switch>
       <Route path="/" exact>
@@ -13,9 +14,8 @@ const App = () => {
           <Home />
         </AppLayout>
       </Route>
-      <Route path="/test">
-        <Test />
-      </Route>
+      <Route path="/todo-lists" component={TodoLists} />
+      <Route path="/todo" component={Todos} />
       <Route component={Error404} />
     </Switch>
   );

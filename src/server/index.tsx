@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { createStore } from 'redux';
+import { ServerStyleSheet } from 'styled-components';
 import App from '../App';
 import reducers from '../store/reducers/index';
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 declare const module: any;
 const initialState = {};
 const store = createStore(reducers, initialState);
+const sheet = new ServerStyleSheet();
 
 // Tell express to serve our static files from our output folder
 app.use(express.static('dist/public'));
@@ -29,18 +31,20 @@ app.get('/*', (req, res) => {
       </StaticRouter>
     </ReduxProvider>
   );
-  const reactDom = renderToString(appComponent);
+  const reactDom = renderToString(sheet.collectStyles(appComponent));
+  const styles = sheet.getStyleTags();
 
-  res.send(htmlTemplate(reactDom));
+  res.send(htmlTemplate(reactDom, styles));
 });
 
-function htmlTemplate(reactDom: string) {
+function htmlTemplate(reactDom: string, styles: string) {
   return `
     <!DOCTYPE html>
       <html>
         <head>
           <title>React and TypeScript with webpack</title>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+          ${styles}
         </head>
         <body style="background-color: #29516D">
           <div id="root">${reactDom}</div>

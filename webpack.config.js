@@ -24,10 +24,15 @@ const config = {
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['css-loader', 'style-loader'],
+      },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'jsx'],
+    extensions: ['.ts', '.tsx', '.js', 'jsx', '.css'],
     modules: ['src', 'node_modules'],
   },
   plugins: [

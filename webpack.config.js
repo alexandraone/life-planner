@@ -3,8 +3,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const env = require('dotenv').config();
 const NodemonPlugin = require('nodemon-webpack-plugin');
+const env = require('dotenv').config();
 
 const mode = process.env.NODE_ENV || 'development';
 

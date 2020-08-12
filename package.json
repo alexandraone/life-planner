@@ -6,8 +6,8 @@
 	"scripts": {
 		"build": "webpack --config webpack.config.js --mode production",
 		"start": "npm run build && node dist/server.js --open ",
-		"dev": "webpack --watch",
 		"heroku-postbuild": "cd src && npm install && npm run build",
+		"dev": "webpack --watch",
 		"lint": "eslint --ext .ts --ext tsx ./src",
 		"lint:fix": "eslint --ext .ts --ext tsx ./src --fix --quiet"
 	},

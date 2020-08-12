@@ -1,19 +1,17 @@
 import {
+  AddTodoAction,
+  AddTodoListAction,
   ADD_LIST,
   ADD_TODO,
+  DeleteTodoAction,
+  DeleteTodoListAction,
   DELETE_LIST,
   DELETE_TODO,
+  EditTodoListAction,
   EDIT_LIST,
+  ToggleTodoAction,
   TOGGLE_TODO,
 } from './types';
-
-export interface AddTodoAction {
-  type: typeof ADD_TODO;
-  title: string;
-  dueDate: string;
-  todoListId: number;
-  completed: boolean;
-}
 
 export const addTodo = (
   title: string,
@@ -29,35 +27,35 @@ export const addTodo = (
   };
 };
 
-export const toggleTodo = (id: number) => {
+export const toggleTodo = (id: number): ToggleTodoAction => {
   return {
     type: TOGGLE_TODO,
     id,
   };
 };
 
-export const deleteTodo = (id: number) => {
+export const deleteTodo = (id: number): DeleteTodoAction => {
   return {
     type: DELETE_TODO,
     id,
   };
 };
 
-export const addTodoList = (title: string) => {
+export const addTodoList = (title: string): AddTodoListAction => {
   return {
     type: ADD_LIST,
     title,
   };
 };
 
-export const deleteTodoList = (id: number) => {
+export const deleteTodoList = (id: number): DeleteTodoListAction => {
   return {
     type: DELETE_LIST,
     id,
   };
 };
 
-export const editTodoList = (title: string, id: number) => {
+export const editTodoList = (title: string, id: number): EditTodoListAction => {
   return {
     type: EDIT_LIST,
     id,

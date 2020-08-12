@@ -16,4 +16,10 @@ export interface ApplicationState {
   lists: IList[];
 }
 
+export interface TodoListState {
+  todos: ITodo[];
+  lists: IList[];
+}
+
+export type TodosOrListsState = ITodo[] | IList[];
 export type PartialState = Partial<ApplicationState>;

@@ -42,7 +42,7 @@ function htmlTemplate(reactDom: string) {
           <title>React and TypeScript with webpack</title>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
         </head>
-        <body>
+        <body style="background-color: #29516D">
           <div id="root">${reactDom}</div>
           <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}

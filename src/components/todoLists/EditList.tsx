@@ -1,8 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import { editTodoList } from '../../store/actions/index';
-import { ApplicationState } from '../../store/types';
 import ListForm from './ListForm';
 
 interface EditListProps {
@@ -12,9 +11,6 @@ interface EditListProps {
 const EditList: FC<EditListProps> = ({ listId }: EditListProps) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const list = useSelector((state: ApplicationState) =>
-    state.lists.filter((list) => list.id === listId)
-  );
 
   const show = () => setOpen(true);
   const close = () => setOpen(false);
@@ -33,12 +29,7 @@ const EditList: FC<EditListProps> = ({ listId }: EditListProps) => {
       <Modal size={'mini'} open={open} onClose={close}>
         <Modal.Header>Edit title</Modal.Header>
         <Modal.Content>
-          <ListForm
-            //initialValues={{ title: list[0].title }}
-            onSubmit={onSubmit}
-            name="title"
-            label="Edit List"
-          />
+          <ListForm onSubmit={onSubmit} name="title" label="Edit List" />
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => setOpen(false)}>

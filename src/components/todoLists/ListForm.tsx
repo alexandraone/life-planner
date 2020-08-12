@@ -14,7 +14,6 @@ const ListForm: FC<ListFormProps> = ({
   name,
   label,
 }: ListFormProps) => {
-  console.log('listFormProps: ', name);
   return (
     <Form
       onSubmit={onSubmit}
